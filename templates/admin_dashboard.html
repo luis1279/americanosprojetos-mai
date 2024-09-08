@@ -1,0 +1,112 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Administrador</title>
+    <style>
+        body {
+            background-color: #bafef3; /* Cor de fundo clara */
+            color: #11015a; /* Cor do texto */
+        }
+    </style>
+</head>
+<body>
+    <h1>Painel do Administrador</h1>
+    <a href="/admin_alunos"><button style="color: #11015a;">Gerenciar Alunos</button></a><br><br>
+    <a href="/admin_professores"><button style="color: #11015a;">Gerenciar Professores</button></a><br><br>
+    <a href="/admin_transacoes"><button style="color: #11015a;">Registros de Transações</button></a><br><br>
+    <a href="{{ url_for('admin_saldos') }}"><button style="color: #11015a;">Ver Saldos dos Alunos</button></a>
+    <br><br>
+    <a href="/"><button>Voltar</button></a>
+</body>
+</html> -->
+
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Administrador</title>
+    <style>
+        /* Fonte personalizada do Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        /* Estilos gerais da página */
+        body {
+            background-color: #bafef3; /* Cor de fundo clara */
+            color: #11015a; /* Cor do texto */
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Container do conteúdo */
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        /* Título */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            letter-spacing: 1.5px;
+        }
+
+        /* Botões */
+        a button {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        a button:hover {
+            background-color: #0a58ca;
+            transform: translateY(-3px);
+        }
+
+        /* Ajuste para dispositivos móveis */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            a button {
+                font-size: 1rem;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Painel do Administrador</h1>
+
+        <a href="/admin_alunos"><button>Gerenciar Alunos</button></a>
+        <a href="/admin_professores"><button>Gerenciar Professores</button></a>
+        <a href="/admin_transacoes"><button>Registros de Transações</button></a>
+        <a href="{{ url_for('admin_saldos') }}"><button>Ver Saldos dos Alunos</button></a>
+
+        <br><br>
+
+        <a href="/"><button>Voltar</button></a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros de Transações</title>
+    <style>
+        body {
+            background-color: #bafef3; /* Cor de fundo clara */
+            color: #11015a; /* Cor do texto */
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+            text-align: left;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        select, button {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registros de Transações</h1>
+    <a href="/admin_dashboard"><button>Voltar</button></a>
+    <br><br>
+
+    Formulário para selecionar o professor e a turma
+    <form method="POST" action="{{ url_for('admin_transacoes') }}">
+        <label for="professor">Selecione o Professor:</label><br>
+        <select id="professor" name="professor">
+            <option value="all" {% if not professor_selecionado %}selected{% endif %}>Todos os Professores</option>
+            {% for professor in professores %}
+                <option value="{{ professor.id }}" {% if professor_selecionado and professor_selecionado.nome == professor.nome %}selected{% endif %}>
+                    {{ professor.nome }}
+                </option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label for="turma">Selecione a Turma:</label><br>
+        <select id="turma" name="turma">
+            <option value="" {% if not turma_selecionada %}selected{% endif %}>Todas as Turmas</option>
+            {% for turma in turmas %}
+                <option value="{{ turma.turma }}" {% if turma_selecionada == turma.turma %}selected{% endif %}>
+                    {{ turma.turma }}
+                </option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button type="submit">Filtrar</button>
+    </form>
+
+    {% if transacoes %}
+        <br>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Data e Hora</th>
+                    <th>Aluno</th>
+                    <th>Professor</th>
+                    <th>Tipo</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transacao in transacoes %}
+                <tr>
+                    <td>{{ transacao.data }}</td>
+                    <td>{{ transacao.aluno_nome }}</td>
+                    <td>{{ transacao.professor_nome }}</td>
+                    <td>{{ "Adição" if transacao.tipo == 'add' else "Retirada" }}</td>
+                    <td>{{ transacao.quantidade }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros de Transações</title>
+    <style>
+        /* Fonte personalizada do Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        /* Estilos gerais da página */
+        body {
+            background-color: #bafef3; /* Cor de fundo clara */
+            color: #11015a; /* Cor do texto */
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Título */
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* Estilo do formulário */
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+        }
+
+        select, button {
+            border: 1px solid #d1d1d1;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #0a58ca;
+            transform: translateY(-3px);
+        }
+
+        /* Estilo da tabela */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+        }
+
+        th, td {
+            border: 1px solid #d1d1d1;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f1f1;
+            font-weight: bold;
+        }
+
+        /* Ajuste para dispositivos móveis */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            select, button {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Registros de Transações</h1>
+    <a href="/admin_dashboard">
+        <button>Voltar</button>
+    </a>
+    <br>
+
+    <!-- Formulário para selecionar o professor e a turma -->
+    <form method="POST" action="{{ url_for('admin_transacoes') }}">
+        <label for="professor">Selecione o Professor:</label>
+        <select id="professor" name="professor">
+            <option value="all" {% if not professor_selecionado %}selected{% endif %}>Todos os Professores</option>
+            {% for professor in professores %}
+                <option value="{{ professor.id }}" {% if professor_selecionado and professor_selecionado.nome == professor.nome %}selected{% endif %}>
+                    {{ professor.nome }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="turma">Selecione a Turma:</label>
+        <select id="turma" name="turma">
+            <option value="" {% if not turma_selecionada %}selected{% endif %}>Todas as Turmas</option>
+            {% for turma in turmas %}
+                <option value="{{ turma.turma }}" {% if turma_selecionada == turma.turma %}selected{% endif %}>
+                    {{ turma.turma }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Filtrar</button>
+    </form>
+
+    {% if transacoes %}
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data e Hora</th>
+                    <th>Aluno</th>
+                    <th>Professor</th>
+                    <th>Tipo</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transacao in transacoes %}
+                <tr>
+                    <td>{{ transacao.data }}</td>
+                    <td>{{ transacao.aluno_nome }}</td>
+                    <td>{{ transacao.professor_nome }}</td>
+                    <td>{{ "Adição" if transacao.tipo == 'add' else "Retirada" }}</td>
+                    <td>{{ transacao.quantidade }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</body>
+</html>

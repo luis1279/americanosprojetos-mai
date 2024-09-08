@@ -1,0 +1,269 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Professor</title>
+    <style>
+        body {
+            background-color: #bafef3; /* Cor de fundo clara */
+            color: #11015a; /* Cor do texto */
+        }
+    </style>
+</head>
+<body>
+    <h1>Painel do Professor</h1>
+    <a href="/"><button>Voltar</button></a>
+    <a href="/professor_transacoes"><button style="color: #11015a;">Registros de Transações</button></a><br><br>
+    <br>
+    
+    Formulário para selecionar a turma e visualizar alunos -->
+    <!-- <form method="POST" action="{{ url_for('professor_dashboard') }}">
+        <label for="turma">Selecione a Turma:</label><br>
+        <select id="turma" name="turma" required>
+            {% for turma in turmas %}
+                <option value="{{ turma.turma }}">{{ turma.turma }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Selecionar</button>
+    </form>
+
+    {% if alunos %}
+        <br>
+        <form method="POST" action="{{ url_for('update_americanos') }}">
+            <label for="tipo">Tipo de Transação:</label><br>
+            <select id="tipo" name="tipo" required>
+                <option value="add">Adicionar</option>
+                <option value="remove">Retirar</option>
+            </select><br><br>
+            <label for="quantidade">Quantidade de Americanos:</label><br>
+            <input type="number" id="quantidade" name="quantidade" min="1" required><br>
+
+            <h2>Alunos da Turma:</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">V</th>
+                        <th style="text-align: center;">Nome</th>
+                        <th style="text-align: center;">Saldo com o professor</th>
+                        <th style="text-align: center;">Total Distribuído</th>
+                        <th style="text-align: center;">Total de Penalidades</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for aluno, aluno_a, aluno_r in alunos_completos %}
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" name="alunos" value="{{ aluno.id }}"></td>
+                        <td>{{ aluno.nome }}</td>
+                        <td style="text-align: center;">{{ aluno[professor_nome] }}</td>
+                        <td style="text-align: center;">{{ aluno_a[professor_nome] }}</td>
+                        <td style="text-align: center;">{{ aluno_r[professor_nome] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table> 
+            <br>
+            <button type="submit">Finalizar Transação</button>
+        </form>
+    {% endif %}
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Professor</title>
+    <style>
+        /* Fonte personalizada do Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        /* Estilos gerais da página */
+        body {
+            background-color: #bafef3; /* Cor de fundo clara */
+            color: #11015a; /* Cor do texto */
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Container do painel */
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Título */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            letter-spacing: 1.5px;
+        }
+
+        /* Botões */
+        a button {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        a button:hover {
+            background-color: #0a58ca;
+            transform: translateY(-3px);
+        }
+
+        /* Formulário e seleção */
+        form label, form select, form input {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            display: block;
+            width: 100%;
+        }
+
+        form select, form input {
+            padding: 10px;
+            font-size: 1.1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        form button {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        form button:hover {
+            background-color: #0a58ca;
+            transform: translateY(-3px);
+        }
+
+        /* Tabela de alunos */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #11015a;
+            padding: 15px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        th {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Ajuste para dispositivos móveis */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            a button, form button {
+                font-size: 1rem;
+                padding: 10px;
+            }
+
+            th, td {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Painel do Professor</h1>
+
+        <a href="/"><button>Voltar</button></a>
+        <a href="/professor_transacoes"><button>Registros de Transações</button></a>
+
+        <br><br>
+
+        <!-- Formulário para selecionar a turma e visualizar alunos -->
+        <form method="POST" action="{{ url_for('professor_dashboard') }}">
+            <label for="turma">Selecione a Turma:</label>
+            <select id="turma" name="turma" required>
+                {% for turma in turmas %}
+                    <option value="{{ turma.turma }}">{{ turma.turma }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Selecionar</button>
+        </form>
+
+        {% if alunos %}
+            <br>
+            <form method="POST" action="{{ url_for('update_americanos') }}">
+                <label for="tipo">Tipo de Transação:</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="add">Adicionar</option>
+                    <option value="remove">Retirar</option>
+                </select>
+
+                <label for="quantidade">Quantidade de Americanos:</label>
+                <input type="number" id="quantidade" name="quantidade" min="1" required>
+
+                <h2>Alunos da Turma:</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Selecionar</th>
+                            <th>Nome</th>
+                            <th>Saldo com o professor</th>
+                            <th>Total Distribuído</th>
+                            <th>Total de Penalidades</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for aluno, aluno_a, aluno_r in alunos_completos %}
+                        <tr>
+                            <td><input type="checkbox" name="alunos" value="{{ aluno.id }}"></td>
+                            <td>{{ aluno.nome }}</td>
+                            <td>{{ aluno[professor_nome] }}</td>
+                            <td>{{ aluno_a[professor_nome] }}</td>
+                            <td>{{ aluno_r[professor_nome] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+                <button type="submit">Finalizar Transação</button>
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>

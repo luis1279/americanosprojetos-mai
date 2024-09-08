@@ -1,0 +1,333 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acessar meus Americanos</title>
+    <style>
+        body {
+            background-color: #bafef3; /* Cor de fundo clara */
+            color: #11015a; /* Cor do texto */
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Acessar meus Americanos</h1>
+    <form method="POST">
+        <label for="codigo">Meu Código:</label><br>
+        <input type="text" id="codigo" name="codigo" required><br><br>
+        <button type="submit">Consultar</button>
+    </form>
+    {% if aluno %}
+        <h2>Nome: {{ aluno.nome }}</h2>
+        <h2>Turma: {{ aluno.turma }}</h2>
+        <h2>Total de Americanos: {{ aluno.saldo }}</h2>
+        <h2>Penalidades: {{ aluno_retiradas.saldo }}</h2>
+        <br>
+        <h2>Americanos Conquistados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Professor</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amanda</td>
+                    <td style="text-align: center;">{{ aluno_adicoes["Amanda"] }}</td>
+                </tr>
+                <tr>
+                    <td>Daniella</td>
+                    <td style="text-align: center;">{{ aluno_adicoes["Daniella Amaral Pinto"] }}</td>
+                </tr>
+                <tr>
+                    <td>Elizete</td>
+                    <td style="text-align: center;">{{ aluno_adicoes["Elizete"] }}</td>
+                </tr>
+                <tr>
+                    <td>Fátima</td>
+                    <td style="text-align: center;">{{ aluno_adicoes["Fátima"] }}</td>
+                </tr>
+                <tr>
+                    <td>Heryco</td>
+                    <td style="text-align: center;">{{ aluno_adicoes["Heryco Lemos Queirós"] }}</td>
+                </tr>
+                <tr>
+                    <td>João Pedro</td>
+                    <td style="text-align: center;">{{ aluno_adicoes["João Pedro Mendes de Siqueira"] }}</td>
+                </tr>
+                <tr>
+                    <td>Luciano</td>
+                    <td style="text-align: center;">{{ aluno_adicoes["Luciano"] }}</td>
+                </tr>
+                <tr>
+                    <td>Maria Aparecida</td>
+                    <td style="text-align: center;">{{ aluno_adicoes["Maria Aparecida"] }}</td>
+                </tr>
+                <tr>
+                    <td>Nayara</td>
+                    <td style="text-align: center;">{{ aluno_adicoes["Nayara Cristina de Jesus Ferreira"] }}</td>
+                </tr>
+                <tr>
+                    <td>Pedro Henrique</td>
+                    <td style="text-align: center;">{{ aluno_adicoes["Pedro Henrique Pereira Dos Santos"] }}</td>
+                </tr>
+                <tr>
+                    <td>Rodrigo</td>
+                    <td style="text-align: center;">{{ aluno_adicoes["Rodrigo Prado"] }}</td>
+                </tr>
+                <tr>
+                    <td>Stael</td>
+                    <td style="text-align: center;">{{ aluno_adicoes["Stael Batista Schenkel de Morais"] }}</td>
+                </tr>
+                <tr>
+                    <td>Tiago</td>
+                    <td style="text-align: center;">{{ aluno_adicoes["Tiago"] }}</td>
+                </tr>
+                <tr>
+                    <td>Coordenação</td>
+                    <td style="text-align: center;">{{ aluno_adicoes["Suely"] }}</td>
+                </tr>
+            </tbody>
+        </table>
+    {% endif %}
+    <br><br>
+    <a href="/"><button>Voltar</button></a>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acessar meus Americanos</title>
+    <style>
+        /* Fonte personalizada do Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        /* Estilos gerais da página */
+        body {
+            background-color: #bafef3; /* Cor de fundo clara */
+            color: #11015a; /* Cor do texto */
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Container para form */
+        .container {
+            background-color: #ffffff; /* Fundo branco */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra suave */
+            text-align: center;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        /* Título */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            letter-spacing: 1.5px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+
+        /* Estilo para o formulário */
+        form label {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        form button {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        form button:hover {
+            background-color: #0a58ca;
+            transform: translateY(-3px);
+        }
+
+        /* Estilos da tabela */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background-color: #11015a;
+            color: white;
+        }
+
+        /* Botão voltar */
+        .back-button {
+            margin-top: 30px;
+            background-color: #ffc107;
+            color: black;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #e0a800;
+            transform: translateY(-3px);
+        }
+
+        /* Ajuste para dispositivos móveis */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            form button {
+                font-size: 1rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Acessar meus Americanos</h1>
+        <form method="POST">
+            <label for="codigo">Meu Código:</label>
+            <input type="text" id="codigo" name="codigo" required>
+            <button type="submit">Consultar</button>
+        </form>
+
+        {% if aluno %}
+            <h2>Nome: {{ aluno.nome }}</h2>
+            <h2>Turma: {{ aluno.turma }}</h2>
+            <h2>Total de Americanos: {{ aluno.saldo }}</h2>
+            <h2>Penalidades: {{ aluno_retiradas.saldo }}</h2>
+            <br>
+
+            <h2>Americanos Conquistados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Professor</th>
+                        <th>Quantidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Amanda</td>
+                        <td style="text-align: center;">{{ aluno_adicoes["Amanda"] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Daniella</td>
+                        <td style="text-align: center;">{{ aluno_adicoes["Daniella Amaral Pinto"] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Elizete</td>
+                        <td style="text-align: center;">{{ aluno_adicoes["Elizete"] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Fátima</td>
+                        <td style="text-align: center;">{{ aluno_adicoes["Fátima"] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Heryco</td>
+                        <td style="text-align: center;">{{ aluno_adicoes["Heryco Lemos Queirós"] }}</td>
+                    </tr>
+                    <tr>
+                        <td>João Pedro</td>
+                        <td style="text-align: center;">{{ aluno_adicoes["João Pedro Mendes de Siqueira"] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Luciano</td>
+                        <td style="text-align: center;">{{ aluno_adicoes["Luciano"] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Maria Aparecida</td>
+                        <td style="text-align: center;">{{ aluno_adicoes["Maria Aparecida"] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nayara</td>
+                        <td style="text-align: center;">{{ aluno_adicoes["Nayara Cristina de Jesus Ferreira"] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Pedro Henrique</td>
+                        <td style="text-align: center;">{{ aluno_adicoes["Pedro Henrique Pereira Dos Santos"] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Rodrigo</td>
+                        <td style="text-align: center;">{{ aluno_adicoes["Rodrigo Prado"] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Stael</td>
+                        <td style="text-align: center;">{{ aluno_adicoes["Stael Batista Schenkel de Morais"] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tiago</td>
+                        <td style="text-align: center;">{{ aluno_adicoes["Tiago"] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Coordenação</td>
+                        <td style="text-align: center;">{{ aluno_adicoes["Suely"] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        {% endif %}
+
+        <br><a href="/" class="back-button">Voltar</a>
+    </div>
+</body>
+</html>

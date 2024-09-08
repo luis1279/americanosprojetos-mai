@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Professor</title>
+    <style>
+        body {
+            background-color: #bafef3; /* Cor de fundo clara */
+            color: #11015a; /* Cor do texto */
+        }
+    </style>
+</head>
+<body>
+    <h1>Editar Professor</h1>
+    <form method="POST">
+        <label for="nome">Nome do Professor:</label><br>
+        <input type="text" id="nome" name="nome" value="{{ professor.nome }}" required><br><br>
+        <label for="login">Nome de Usuário:</label><br>
+        <input type="text" id="login" name="login" value="{{ professor.login }}" required><br><br>
+        <label for="senha">Senha:</label><br>
+        <input type="password" id="senha" name="senha" value="{{ professor.senha }}" required><br><br>
+        <button type="submit">Salvar Alterações</button>
+    </form>
+    <br><br>
+
+    <form method="POST" action="/delete_professor" onsubmit="return confirm('Tem certeza que deseja excluir este professor? Esta ação não pode ser desfeita.');">
+        <input type="hidden" name="professor_id" value="{{ professor.id }}">
+        <button type="submit" style="color: red;">Excluir Professor</button>
+    </form>
+
+    <br><br>
+
+
+    <a href="/admin_professores"><button>Voltar</button></a>
+</body>
+</html>

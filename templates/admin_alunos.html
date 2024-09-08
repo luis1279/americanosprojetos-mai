@@ -1,0 +1,281 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Alunos</title>
+    <style>
+        body {
+            background-color: #bafef3; /* Cor de fundo clara */
+            color: #11015a; /* Cor do texto */
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+    <script>
+        function confirmDeletion(alunoId) {
+            if (confirm("Você tem certeza que deseja excluir este aluno?")) {
+                window.location.href = '/delete_aluno/' + alunoId;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Gerenciar Alunos</h1>
+    <a href="/admin_dashboard"><button>Voltar</button></a>
+    <br><br>
+    
+    <form method="POST">
+        <label for="nome">Nome do Aluno:</label><br>
+        <input type="text" id="nome" name="nome" required><br><br>
+        <label for="turma">Turma:</label><br>
+        <select id="turma" name="turma" required>
+            <option value="1A">1A</option>
+            <option value="1B">1B</option>
+            <option value="1C">1C</option>
+            <option value="1D">1D</option>
+            <option value="2A">2A</option>
+            <option value="2B">2B</option>
+            <option value="3A">3A</option>
+            <option value="3B">3B</option>
+        </select><br><br>
+        <label for="codigo">Código:</label><br>
+        <input type="text" id="codigo" name="codigo" required><br><br>
+        <button type="submit">Adicionar Aluno</button>
+    </form>
+
+    <br><br>
+    
+    <form method="GET" action="/admin_alunos">
+        <label for="filtro_turma">Filtrar por Turma:</label>
+        <select id="filtro_turma" name="turma">
+            <option value="">Todos</option>
+            {% for turma in turmas %}
+                <option value="{{ turma['turma'] }}" {% if request.args.get('turma') == turma['turma'] %}selected{% endif %}>{{ turma['turma'] }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <h2>Alunos Cadastrados:</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Turma</th>
+                <th>Nome</th>   
+                <th>Código</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for aluno in alunos %}
+            <tr>
+                <td>{{ aluno.turma }}</td>
+                <td>{{ aluno.nome }}</td>
+                <td>{{ aluno.codigo }}</td>
+                <td><button onclick="confirmDeletion({{ aluno.id }})">Excluir</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> 
+    
+    <br><br>
+</body>
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Alunos</title>
+    <style>
+        /* Fonte personalizada do Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        /* Estilos gerais da página */
+        body {
+            background-color: #bafef3; /* Cor de fundo clara */
+            color: #11015a; /* Cor do texto */
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Título */
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* Container do formulário */
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        /* Estilos do formulário */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Alinha os itens no centro horizontalmente */
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            border: 1px solid #d1d1d1;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #0a58ca;
+            transform: translateY(-3px);
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #d1d1d1;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e2e6ea;
+            font-weight: bold;
+        }
+
+        /* Ajuste para dispositivos móveis */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            input, select, button {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <script>
+        function confirmDeletion(alunoId) {
+            if (confirm("Você tem certeza que deseja excluir este aluno?")) {
+                window.location.href = '/delete_aluno/' + alunoId;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Gerenciar Alunos</h1>
+    <a href="/admin_dashboard"><button>Voltar</button></a><br>
+
+    <div class="form-container">
+        <form method="POST">
+            <label for="nome">Nome do Aluno:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="turma">Turma:</label>
+            <select id="turma" name="turma" required>
+                <option value="1A">1A</option>
+                <option value="1B">1B</option>
+                <option value="1C">1C</option>
+                <option value="1D">1D</option>
+                <option value="2A">2A</option>
+                <option value="2B">2B</option>
+                <option value="3A">3A</option>
+                <option value="3B">3B</option>
+            </select>
+
+            <label for="codigo">Código:</label>
+            <input type="text" id="codigo" name="codigo" required>
+
+            <button type="submit">Adicionar Aluno</button>
+        </form>
+    </div>
+
+    <div class="form-container">
+        <form method="GET" action="/admin_alunos">
+            <label for="filtro_turma">Filtrar por Turma:</label>
+            <select id="filtro_turma" name="turma">
+                <option value="">Todos</option>
+                {% for turma in turmas %}
+                    <option value="{{ turma['turma'] }}" {% if request.args.get('turma') == turma['turma'] %}selected{% endif %}>{{ turma['turma'] }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Filtrar</button>
+        </form>
+    </div>
+
+    <h2>Alunos Cadastrados:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Turma</th>
+                <th>Nome</th>   
+                <th>Código</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for aluno in alunos %}
+            <tr>
+                <td>{{ aluno.turma }}</td>
+                <td>{{ aluno.nome }}</td>
+                <td>{{ aluno.codigo }}</td>
+                <td><button onclick="confirmDeletion({{ aluno.id }})">Excluir</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

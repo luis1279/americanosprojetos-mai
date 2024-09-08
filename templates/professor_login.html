@@ -1,0 +1,152 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Professor</title>
+    <style>
+        body {
+            background-color: #bafef3; /* Cor de fundo clara */
+            color: #11015a; /* Cor do texto */
+        }
+    </style>
+</head>
+<body>
+    <h1>Acesso Professor</h1>
+    <form method="POST">
+        <label for="login">Login:</label><br>
+        <input type="text" id="login" name="login" required><br><br>
+        <label for="senha">Senha:</label><br>
+        <input type="password" id="senha" name="senha" required><br><br>
+        <button type="submit">Entrar</button>
+    </form>
+    <br><br>
+    <a href="/"><button>Voltar</button></a>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Professor</title>
+    <style>
+        /* Fonte personalizada do Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        /* Estilos gerais da página */
+        body {
+            background-color: #bafef3; /* Cor de fundo clara */
+            color: #11015a; /* Cor do texto */
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Container do formulário */
+        .container {
+            background-color: #ffffff; /* Fundo branco */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra suave */
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        /* Título */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            letter-spacing: 1.5px;
+        }
+
+        /* Estilo para o formulário */
+        form label {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        form button {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        form button:hover {
+            background-color: #0a58ca;
+            transform: translateY(-3px);
+        }
+
+        /* Botão voltar */
+        .back-button {
+            margin-top: 30px;
+            background-color: #ffc107;
+            color: black;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #e0a800;
+            transform: translateY(-3px);
+        }
+
+        /* Ajuste para dispositivos móveis */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            form button {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Acesso Professor</h1>
+        <form method="POST">
+            <label for="login">Login:</label>
+            <input type="text" id="login" name="login" required>
+            
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
+            
+            <button type="submit">Entrar</button>
+        </form>
+
+        <br><a href="/" class="back-button">Voltar</a>
+    </div>
+</body>
+</html>
